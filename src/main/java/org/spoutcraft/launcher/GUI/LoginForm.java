@@ -110,7 +110,7 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 	Container offlinePane = new Container();
 
 	public LoginForm() {
-		this.updateDialog = new UpdateDialog(this);
+		LoginForm.updateDialog = new UpdateDialog(this);
 		settings.load();
 		gu.setListener(this);
 
@@ -589,7 +589,6 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 
 				SwingWorker<Boolean, String> updateThread = new SwingWorker<Boolean, String>() {
 
-					@Override
 					protected void done() {
 						if (mcUpdate) {
 							updateDialog.setToUpdate("Minecraft");
@@ -599,7 +598,6 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 						LoginForm.updateDialog.setVisible(true);
 					}
 
-					@Override
 					protected Boolean doInBackground() throws Exception {
 
 						publish("Checking for Minecraft Update...\n");
@@ -619,7 +617,6 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 
 					}
 
-					@Override
 					protected void process(List<String> chunks) {
 						progressBar.setString(chunks.get(0));
 					}
@@ -632,9 +629,8 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 	}
 
 	public void updateThread() {
-		SwingWorker<Boolean, Boolean> updateThread = new SwingWorker<Boolean, Boolean>() {
+		SwingWorker<Boolean, String> updateThread = new SwingWorker<Boolean, String>() {
 
-			@Override
 			protected void done() {
 				progressBar.setVisible(false);
 				if (!isCancelled()) {
@@ -644,7 +640,6 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 				}
 			}
 
-			@Override
 			protected Boolean doInBackground() throws Exception {
 				try {
 					if (mcUpdate) {
@@ -666,8 +661,7 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 				}
 				return true;
 			}
-			
-			@Override
+
 			protected void process(List<String> chunks) {
 				progressBar.setString(chunks.get(0));
 			}
