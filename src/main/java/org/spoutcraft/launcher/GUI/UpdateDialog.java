@@ -62,7 +62,6 @@ public class UpdateDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Yes")) {
 			lf.updateThread();
