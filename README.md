@@ -12,7 +12,6 @@ and the forums are here: http://technicpack.net/forums/
 
 TechnicPackTeam Sorry
 
-
-
 Korea - wswse
+
 Korea Tekkit Commumity's wswse
