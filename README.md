@@ -7,3 +7,12 @@ The goal of this launcher is to provide a one-click method to switch modpacks an
 Main Technic site is here: http://technicpack.net/
 
 and the forums are here: http://technicpack.net/forums/
+
+-------------------
+
+TechnicPackTeam Sorry
+
+
+
+Korea - wswse
+Korea Tekkit Commumity's wswse
