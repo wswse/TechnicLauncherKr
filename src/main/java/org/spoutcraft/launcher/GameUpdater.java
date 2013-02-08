@@ -123,9 +123,9 @@ public class GameUpdater implements DownloadListener {
       String output = tempDir + File.separator + "minecraft.jar";
       MinecraftDownloadUtils.downloadMinecraft(minecraftURL, output, build, listener);
     }
-    stateChanged("Copying minecraft.jar from cache", 0);
+    stateChanged("캐시에서 minecraft.jar 복사", 0);
     copy(mcCache, new File(binDir, "minecraft.jar"));
-    stateChanged("Copied minecraft.jar from cache", 100);
+    stateChanged("캐시에서 minecraft.jar 복사완료", 100);
 
     File nativesDir = new File(binDir.getPath(), "natives");
     nativesDir.mkdir();
@@ -136,7 +136,7 @@ public class GameUpdater implements DownloadListener {
     if (!mcCache.exists() || !jinputMD5.equals(MD5Utils.getMD5(mcCache))) {
       DownloadUtils.downloadFile(getNativesUrl() + "jinput.jar", binDir.getPath() + File.separator + "jinput.jar", "jinput.jar", md5, listener);
     } else {
-      stateChanged("Copying jinput.jar from cache", 0);
+      stateChanged("캐시에서 jinput.jar 복사", 0);
       copy(mcCache, new File(binDir, "jinput.jar"));
       stateChanged("Copied jinput.jar from cache", 100);
     }
