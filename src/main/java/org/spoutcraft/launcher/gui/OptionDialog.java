@@ -56,15 +56,15 @@ public class OptionDialog extends JDialog implements ActionListener {
   private static final long  serialVersionUID   = 1L;
   private final JPanel       contentPanel       = new JPanel();
   public Map<String, String> modPackList        = null;
-  JRadioButton               devBuilds          = new JRadioButton("Always use development builds");
-  JRadioButton               recBuilds          = new JRadioButton("Always use recommended builds");
-  JRadioButton               customBuilds       = new JRadioButton("Manual build selection");
+  JRadioButton               devBuilds          = new JRadioButton("항상 개발자빌드 사용");
+  JRadioButton               recBuilds          = new JRadioButton("항상 권장빌드 사용");
+  JRadioButton               customBuilds       = new JRadioButton("수동 빌드선택");
   // JCheckBox clipboardCheckbox = new
   // JCheckBox("Allow access to your clipboard");
-  JCheckBox                  backupCheckbox     = new JCheckBox("Include worlds when doing automated backup");
-  JCheckBox                  retryLoginCheckbox = new JCheckBox("Retry after connection timeout");
+  JCheckBox                  backupCheckbox     = new JCheckBox("자동백업을할때 월드도 백업");
+  JCheckBox                  retryLoginCheckbox = new JCheckBox("연결시간 초과시 다시시도");
   JComboBox                  memoryCombo        = new JComboBox();
-  JButton                    clearCache         = new JButton("Clear Cache");
+  JButton                    clearCache         = new JButton("캐시 삭제");
   JLabel                     buildInfo          = new JLabel();
   JComboBox                  buildsCombo        = new JComboBox();
   JLabel                     urlLabel           = new JLabel();
@@ -82,13 +82,13 @@ public class OptionDialog extends JDialog implements ActionListener {
     group.add(recBuilds);
     group.add(customBuilds);
 
-    buildInfo.setText("Technic Launcher Build " + Main.build);
+    buildInfo.setText("테크닉 련쳐 빌드 " + Main.build);
     buildInfo.setOpaque(true);
     buildInfo.setForeground(Color.DARK_GRAY);
     buildInfo
-        .setToolTipText("Created by the Spout Development Team and Modified by the Technic Team. Licensed under the LGPL. Source code is available at www.github.com/SpoutDev");
+        .setToolTipText("스파웃팀에서 생성하고 태크닉팀에서 수정. LGPL라이센스하로로 사용가능. 소스코드는 www.github.com/SpoutDev에서 보실수 있습니다");
 
-    urlLabel.setText("Custom ZIP");
+    urlLabel.setText("커스텀 ZIP");
     urlLabel.setOpaque(true);
     urlLabel.setForeground(Color.DARK_GRAY);
 
@@ -202,7 +202,7 @@ public class OptionDialog extends JDialog implements ActionListener {
         getRootPane().setDefaultButton(okButton);
       }
       {
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("C");
         cancelButton.setFont(font);
         cancelButton.setActionCommand("Cancel");
         cancelButton.addActionListener(this);
