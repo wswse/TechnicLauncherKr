@@ -161,7 +161,7 @@ public class OptionDialog extends JDialog implements ActionListener {
     recBuilds.setFont(font);
     retryLoginCheckbox.setFont(font);
     clearCache.setFont(font);
-    clearCache.setActionCommand("Clear Cache");
+    clearCache.setActionCommand("캐쉬 삭제");
     clearCache.addActionListener(this);
     gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING).addGroup(
         gl_contentPanel
