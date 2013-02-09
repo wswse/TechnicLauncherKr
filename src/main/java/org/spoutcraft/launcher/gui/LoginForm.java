@@ -92,16 +92,14 @@ import org.spoutcraft.launcher.modpacks.ModPackYML;
 
 public class LoginForm extends JFrame implements ActionListener, DownloadListener, KeyListener, WindowListener {
 
-  private static final long                serialVersionUID = 1L;
-  private final BackgroundPanel            contentPane;
   private final JPasswordField             passwordField;
   private final JComboBox                  usernameField    = new JComboBox();
-  private final JButton                    loginButton      = new JButton("로그인");
-  JButton                                  optionsButton    = new JButton("설정");
-  JButton                                  modsButton       = new JButton("모드선택");
-  private final JCheckBox                  rememberCheckbox = new JCheckBox("로그인 상태 기억");
-  private final JButton                    offlineMode      = new JButton("오프라인 모드");
-  private final JButton                    tryAgain         = new JButton("다시시도");
+  private final JButton                    loginButton      = new JButton("Login");
+  JButton                                  optionsButton    = new JButton("Options");
+  JButton                                  modsButton       = new JButton("Mod Select");
+  private final JCheckBox                  rememberCheckbox = new JCheckBox("Remember");
+  private final JButton                    offlineMode      = new JButton("Offline Mode");
+  private final JButton                    tryAgain         = new JButton("Try Again");
   final JTextPane                          editorPane       = new JTextPane();
   private final JButton                    loginSkin1;
   private final List<JButton>              loginSkin1Image;
