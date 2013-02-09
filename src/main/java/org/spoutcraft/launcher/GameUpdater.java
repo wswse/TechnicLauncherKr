@@ -138,7 +138,7 @@ public class GameUpdater implements DownloadListener {
     } else {
       stateChanged("캐시에서 jinput.jar 복사", 0);
       copy(mcCache, new File(binDir, "jinput.jar"));
-      stateChanged("Copied jinput.jar from cache", 100);
+      stateChanged("캐시에서 jinput.jar 복사완료", 100);
     }
 
     mcCache = new File(cacheDir, "lwjgl.jar");
@@ -146,9 +146,9 @@ public class GameUpdater implements DownloadListener {
     if (!mcCache.exists() || !lwjglMD5.equals(MD5Utils.getMD5(mcCache))) {
       DownloadUtils.downloadFile(getNativesUrl() + "lwjgl.jar", binDir.getPath() + File.separator + "lwjgl.jar", "lwjgl.jar", md5, listener);
     } else {
-      stateChanged("Copying lwjgl.jar from cache", 0);
+      stateChanged("캐시에서 lwjgl.jar 복사", 0);
       copy(mcCache, new File(binDir, "lwjgl.jar"));
-      stateChanged("Copied lwjgl.jar from cache", 100);
+      stateChanged("캐시에서 lwjgl.jar 복사완료", 100);
     }
 
     mcCache = new File(cacheDir, "lwjgl_util.jar");
@@ -156,9 +156,9 @@ public class GameUpdater implements DownloadListener {
     if (!mcCache.exists() || !lwjgl_utilMD5.equals(MD5Utils.getMD5(mcCache))) {
       DownloadUtils.downloadFile(getNativesUrl() + "lwjgl_util.jar", binDir.getPath() + File.separator + "lwjgl_util.jar", "lwjgl_util.jar", md5, listener);
     } else {
-      stateChanged("Copying lwjgl_util.jar from cache", 0);
+      stateChanged("캐시에서 lwjgl_util.jar 복사", 0);
       copy(mcCache, new File(binDir, "lwjgl_util.jar"));
-      stateChanged("Copied lwjgl_util.jar from cache", 100);
+      stateChanged("캐시에서 lwjgl_util.jar 복사완료", 100);
     }
 
     getNatives();
@@ -250,13 +250,13 @@ public class GameUpdater implements DownloadListener {
       ProgressMonitor monitor = zipFile.getProgressMonitor();
       while (monitor.getState() == ProgressMonitor.STATE_BUSY) {
         long totalProgress = monitor.getWorkCompleted() / monitor.getTotalWork();
-        stateChanged(String.format("Extracting '%s'...", monitor.getFileName()), totalProgress);
+        stateChanged(String.format("추출중 '%s'...", monitor.getFileName()), totalProgress);
       }
       File metainfDirectory = new File(destinationDirectory, "META-INF");
       if (metainfDirectory.exists()) {
         Util.removeDirectory(metainfDirectory);
       }
-      stateChanged(String.format("Extracted '%s'", compressedFile.getPath()), 100f);
+      stateChanged(String.format("추출 완료 '%s'", compressedFile.getPath()), 100f);
       if (monitor.getResult() == ProgressMonitor.RESULT_ERROR) {
         if (monitor.getException() != null) {
           monitor.getException().printStackTrace();
@@ -290,14 +290,14 @@ public class GameUpdater implements DownloadListener {
     if (!tempDir.exists())
       tempDir.mkdir();
 
-    stateChanged("Downloading Native LWJGL files...", -1);
+    stateChanged("기본 LWJGL파일을 다운로드...", -1);
     DownloadUtils.downloadFile(getNativesUrl(fname), tempDir.getPath() + File.separator + (!SettingsUtil.isLatestLWJGL() ? "natives.jar.lzma" : "natives.zip"));
-    stateChanged("Downloaded Native LWJGL files...", 100);
+    stateChanged("기본 LWJGL파일이 다운로드됨...", 100);
 
     if (!SettingsUtil.isLatestLWJGL()) {
-      stateChanged("Extracting Native LWJGL files...", -1);
+      stateChanged("기본 LWJGL파일을 추출...", -1);
       extractLZMA(GameUpdater.tempDir.getPath() + File.separator + "natives.jar.lzma", GameUpdater.tempDir.getPath() + File.separator + "natives.zip");
-      stateChanged("Extracted Native LWJGL files...", 100);
+      stateChanged("기본 LWJGL파일이 추출됨...", 100);
     }
 
     return new File(tempDir.getPath() + File.separator + "natives.jar.lzma");
@@ -387,9 +387,9 @@ public class GameUpdater implements DownloadListener {
       File[] existingBackups = backupDir.listFiles();
       (new BackupCleanupThread(existingBackups)).start();
       zip.createNewFile();
-      stateChanged(String.format("Backing up previous build to '%s'...", zip.getName()), 0);
+      stateChanged(String.format("이전파일을 '%s'로 백업중...", zip.getName()), 0);
       addFilesToExistingZip(zip, getFiles(modpackDir, exclude, rootDir), rootDir, false);
-      stateChanged(String.format("Backed up previous build to '%s'...", zip.getName()), 100);
+      stateChanged(String.format("이전파일을 '%s'로 백업완료...", zip.getName()), 100);
 
       if (modsDir.exists())
         FileUtils.deleteDirectory(modsDir);
@@ -514,7 +514,7 @@ public class GameUpdater implements DownloadListener {
 
       progress += progressStep;
       if (progressBar) {
-        stateChanged("Merging Modpack Files Into Minecraft Jar...", progress);
+        stateChanged("minecraft.jar안으로 modpack파일을 넣고있습니다...", progress);
       }
     }
     zin.close();
@@ -534,7 +534,7 @@ public class GameUpdater implements DownloadListener {
 
         progress += progressStep;
         if (progressBar) {
-          stateChanged("Merging Modpack Files Into Minecraft Jar...", progress);
+          stateChanged("minecraft.jar안으로 modpack파일을 넣고있습니다...", progress);
         }
 
         out.closeEntry();
