@@ -96,12 +96,12 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
   private final BackgroundPanel            contentPane;
   private final JPasswordField             passwordField;
   private final JComboBox                  usernameField    = new JComboBox();
-  private final JButton                    loginButton      = new JButton("Login");
-  JButton                                  optionsButton    = new JButton("Options");
-  JButton                                  modsButton       = new JButton("Mod Select");
-  private final JCheckBox                  rememberCheckbox = new JCheckBox("Remember");
-  private final JButton                    offlineMode      = new JButton("Offline Mode");
-  private final JButton                    tryAgain         = new JButton("Try Again");
+  private final JButton                    loginButton      = new JButton("로그인");
+  JButton                                  optionsButton    = new JButton("설정");
+  JButton                                  modsButton       = new JButton("모드선택");
+  private final JCheckBox                  rememberCheckbox = new JCheckBox("로그인 상태 기억");
+  private final JButton                    offlineMode      = new JButton("오프라인 모드");
+  private final JButton                    tryAgain         = new JButton("다시시도");
   final JTextPane                          editorPane       = new JTextPane();
   private final JButton                    loginSkin1;
   private final List<JButton>              loginSkin1Image;
@@ -183,12 +183,12 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
     modpackList.setSelectedItem(SettingsUtil.getModPackSelection());
     modpackList.addActionListener(this);
 
-    JLabel lblMinecraftUsername = new JLabel("Minecraft Username: ");
+    JLabel lblMinecraftUsername = new JLabel("마인크래프트 유저네임: ");
     lblMinecraftUsername.setFont(new Font("Arial", Font.PLAIN, 11));
     lblMinecraftUsername.setHorizontalAlignment(SwingConstants.RIGHT);
     lblMinecraftUsername.setBounds(-17, 17, 150, 14);
 
-    JLabel lblPassword = new JLabel("Password: ");
+    JLabel lblPassword = new JLabel("비밀번호: ");
     lblPassword.setFont(new Font("Arial", Font.PLAIN, 11));
     lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
     lblPassword.setBounds(33, 42, 100, 20);
@@ -219,15 +219,15 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
     progressBar.setStringPainted(true);
     progressBar.setOpaque(true);
 
-    JLabel purchaseAccount = new HyperlinkJLabel("<html><u>Need a minecraft account?</u></html>", "http://www.minecraft.net/register.jsp");
+    JLabel purchaseAccount = new HyperlinkJLabel("<html><u>마인크래프트 계정이 필요해요?</u></html>", "http://www.minecraft.net/register.jsp");
     purchaseAccount.setHorizontalAlignment(SwingConstants.RIGHT);
     purchaseAccount.setBounds(243, 70, 111, 14);
 
-    purchaseAccount.setText("<html><u>Need an account?</u></html>");
+    purchaseAccount.setText("<html><u>마인크래프트 계정이 필요해요?</u></html>");
     purchaseAccount.setFont(new Font("Arial", Font.PLAIN, 11));
     purchaseAccount.setForeground(new Color(0, 0, 255));
 
-    JLabel wikiLink = new HyperlinkJLabel("<html><u>Technic WebSite</u></html>", "http://technicpack.net/");
+    JLabel wikiLink = new HyperlinkJLabel("<html><u>테크닉 웹사이트</u></html>", "http://technicpack.net/");
     wikiLink.setHorizontalAlignment(SwingConstants.RIGHT);
     wikiLink.setBounds(233, 85, 109, 14);
 
@@ -304,7 +304,7 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
     loginPane.add(modsButton);
     contentPane.add(loginPane);
 
-    JLabel offlineMessage = new JLabel("Could not connect to minecraft.net");
+    JLabel offlineMessage = new JLabel("minecraft.net에 연결할수 없습니다");
     offlineMessage.setFont(new Font("Arial", Font.PLAIN, 14));
     offlineMessage.setBounds(25, 40, 217, 17);
 
@@ -366,14 +366,14 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
     if (SettingsUtil.getModPackSelection() != null) {
       updateBranding();
     } else {
-      setTitle("Technic Launcher - No Modpack Selected");
+      setTitle("테크닉 런쳐 Kr - 모드팩 선택 안함");
     }
   }
 
   public void updateBranding() {
     loginButton.setEnabled(false);
     optionsButton.setEnabled(false);
-    setTitle("Loading Modpack Data...");
+    setTitle("모드팩 데이터 로딩중...");
     SwingWorker<Object, Object> updateThread = new SwingWorker<Object, Object>() {
 
       @Override
@@ -393,7 +393,7 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
         loginButton.setEnabled(true);
         optionsButton.setEnabled(true);
         setIconImage(Toolkit.getDefaultToolkit().getImage(ModPackYML.getModPackIcon()));
-        setTitle(String.format("Technic Launcher - %s - (%s)", Main.build, ModPackListYML.currentModPackLabel));
+        setTitle(String.format("테크닉 런쳐 Kr - %s - (%s)", Main.build, ModPackListYML.currentModPackLabel));
         options.reloadSettings();
         MinecraftYML.updateMinecraftYMLCache();
         setModLoaderEnabled();
@@ -639,21 +639,21 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
       @Override
       protected Boolean doInBackground() {
         progressBar.setVisible(true);
-        progressBar.setString("Connecting to www.minecraft.net...");
+        progressBar.setString("minecraft.net에 연결...");
         String password = pass.toString();
         try {
           values = MinecraftUtils.doLogin(user, pass, progressBar);
           return true;
         } catch (AccountMigratedException e) {
-          JOptionPane.showMessageDialog(getParent(), "Account migrated, use e-mail as username");
+          JOptionPane.showMessageDialog(getParent(), "계정 마이그레이션, 사용자 이름으로 전자 메일을 사용");
           this.cancel(true);
           progressBar.setVisible(false);
         } catch (BadLoginException e) {
-          JOptionPane.showMessageDialog(getParent(), "Incorrect usernameField/passwordField combination");
+          JOptionPane.showMessageDialog(getParent(), "잘못된 유저네임/비밀번호");
           this.cancel(true);
           progressBar.setVisible(false);
         } catch (MinecraftUserNotPremiumException e) {
-          JOptionPane.showMessageDialog(getParent(), "You purchase a minecraft account to play");
+          JOptionPane.showMessageDialog(getParent(), "당신 계정에 게임을 구매하세요!");
           this.cancel(true);
           progressBar.setVisible(false);
         } catch (MCNetworkException e) {
@@ -748,21 +748,21 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
 
           @Override
           protected Boolean doInBackground() throws Exception {
-            publish("Checking for Minecraft Update...\n");
+            publish("마인크래프트 업데이트확인...\n");
             try {
               mcUpdate = gameUpdater.checkMCUpdate();
             } catch (Exception e) {
               e.printStackTrace();
             }
 
-            publish("Checking for Spoutcraft update...\n");
+            publish("스파웃크래프트 업데이트확인...\n");
             try {
               spoutUpdate = gameUpdater.isSpoutcraftUpdateAvailable();
             } catch (Exception e) {
               e.printStackTrace();
             }
 
-            publish(String.format("Checking for %s update...\n", ModPackListYML.currentModPackLabel));
+            publish(String.format("%s 업데이트확인...\n", ModPackListYML.currentModPackLabel));
             try {
               modpackUpdate = gameUpdater.isModpackUpdateAvailable();
             } catch (Exception e) {
@@ -832,10 +832,10 @@ public class LoginForm extends JFrame implements ActionListener, DownloadListene
             gameUpdater.updateModPackMods();
           }
         } catch (NoMirrorsAvailableException e) {
-          JOptionPane.showMessageDialog(getParent(), "No Mirrors Are Available to download from!\nTry again later.");
+          JOptionPane.showMessageDialog(getParent(), "현재 미러 다운로드를 사용할수 없습니다!\n나중에 다시시도 해주세요.");
         } catch (Exception e) {
           e.printStackTrace();
-          JOptionPane.showMessageDialog(getParent(), "Update Failed!");
+          JOptionPane.showMessageDialog(getParent(), "업데이트 실페!");
           error = true;
           enableUI();
           this.cancel(true);
